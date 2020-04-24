@@ -44,7 +44,7 @@ public class KafkaToDatabase {
 			return new User(values[0], Integer.parseInt(values[1]), Integer.parseInt(values[2]));
 		}, userEncoder);
 
-		words.printSchema();
+		words.printSchema();    
 
 		StreamingQuery query = words.writeStream().trigger(Trigger.ProcessingTime("5 seconds")).outputMode("append")
 				.option("checkpointLocation", "/tmp/checkpoint").foreach(new JDBCTransactionalWriter()).start();
