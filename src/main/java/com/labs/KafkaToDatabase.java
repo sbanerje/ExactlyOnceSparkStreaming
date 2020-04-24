@@ -46,7 +46,7 @@ public class KafkaToDatabase {
 
 		words.printSchema();    
 
-		StreamingQuery query = words.writeStream().trigger(Trigger.ProcessingTime("5 seconds")).outputMode("append")
+		StreamingQuery query = words.writeStream().trigger(Trigger.ProcessingTime("3 seconds")).outputMode("append")
 				.option("checkpointLocation", "/tmp/checkpoint").foreach(new JDBCTransactionalWriter()).start();
 
 		query.awaitTermination();
